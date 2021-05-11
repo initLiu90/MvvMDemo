@@ -6,17 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lzp.mvvmdemo.R
 import com.lzp.mvvmdemo.common.ViewBinder
-import com.lzp.mvvmdemo.news.model.FooterItemViewMode
-import com.lzp.mvvmdemo.news.model.HeaderItemViewModel
-import com.lzp.mvvmdemo.news.model.NewsItemViewModel
 import com.lzp.mvvmdemo.news.viewbinder.FooterViewBinder
 import com.lzp.mvvmdemo.news.viewbinder.HeaderViewBinder
 import com.lzp.mvvmdemo.news.viewbinder.NewsItemViewBinder
+import com.lzp.mvvmdemo.news.viewmodels.FooterItemViewMode
+import com.lzp.mvvmdemo.news.viewmodels.HeaderItemViewModel
+import com.lzp.mvvmdemo.news.viewmodels.NewsItemViewModel
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment() {
@@ -66,7 +65,7 @@ class MainFragment : Fragment() {
             .addViewBinder(NewsItemViewModel::class, NewsItemViewBinder(viewLifecycleOwner))
 
     private fun observerData() {
-        viewModel.news.observe(viewLifecycleOwner, Observer {
+        viewModel.news.observe(viewLifecycleOwner, {
             adapter.setData(it)
         })
     }

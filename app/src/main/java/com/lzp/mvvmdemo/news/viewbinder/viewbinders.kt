@@ -13,9 +13,9 @@ import com.bumptech.glide.request.target.Target
 import com.lzp.mvvmdemo.R
 import com.lzp.mvvmdemo.common.ViewBinder
 import com.lzp.mvvmdemo.common.ViewHolder
-import com.lzp.mvvmdemo.news.model.FooterItemViewMode
-import com.lzp.mvvmdemo.news.model.HeaderItemViewModel
-import com.lzp.mvvmdemo.news.model.NewsItemViewModel
+import com.lzp.mvvmdemo.news.viewmodels.FooterItemViewMode
+import com.lzp.mvvmdemo.news.viewmodels.HeaderItemViewModel
+import com.lzp.mvvmdemo.news.viewmodels.NewsItemViewModel
 import kotlinx.android.synthetic.main.adapter_item_news.view.*
 
 class HeaderViewBinder : ViewBinder<HeaderItemViewModel>() {

@@ -1,4 +1,4 @@
-package com.lzp.mvvmdemo.news.model
+package com.lzp.mvvmdemo.news.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
