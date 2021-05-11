@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lzp.mvvmdemo.R
+import com.lzp.mvvmdemo.common.ItemViewModel
 import com.lzp.mvvmdemo.common.ViewBinder
 import com.lzp.mvvmdemo.news.viewbinder.FooterViewBinder
 import com.lzp.mvvmdemo.news.viewbinder.HeaderViewBinder
@@ -65,8 +66,12 @@ class MainFragment : Fragment() {
             .addViewBinder(NewsItemViewModel::class, NewsItemViewBinder(viewLifecycleOwner))
 
     private fun observerData() {
-        viewModel.news.observe(viewLifecycleOwner, {
-            adapter.setData(it)
+        viewModel.news.observe(viewLifecycleOwner, { stories ->
+            val itemViewModels = mutableListOf<ItemViewModel>(HeaderItemViewModel())
+            itemViewModels.addAll(stories.map { NewsItemViewModel(it) })
+            itemViewModels.add(FooterItemViewMode())
+
+            adapter.setData(itemViewModels)
         })
     }
 }
