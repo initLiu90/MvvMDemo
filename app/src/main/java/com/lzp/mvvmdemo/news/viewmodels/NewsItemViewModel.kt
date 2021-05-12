@@ -5,10 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.lzp.mvvmdemo.common.ItemViewModel
 import com.lzp.mvvmdemo.model.Story
 
-private const val UNLIKE = "Unlike"
-private const val LIKE = "Like"
+const val UNLIKE = "Unlike"
+const val LIKE = "Like"
 
-class NewsItemViewModel(private val story: Story) : ItemViewModel {
+class NewsItemViewModel(private val handleLike: (Boolean) -> Unit, private val story: Story) :
+    ItemViewModel {
 
     val title: String
         get() = story.title ?: ""
@@ -32,5 +33,6 @@ class NewsItemViewModel(private val story: Story) : ItemViewModel {
             LIKE -> UNLIKE
             else -> UNLIKE
         }
+        handleLike(_like.value == LIKE)
     }
 }

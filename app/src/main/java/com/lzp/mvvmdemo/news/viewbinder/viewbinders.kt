@@ -49,7 +49,9 @@ class FooterViewBinder : ViewBinder<FooterItemViewMode>() {
     }
 }
 
-class NewsItemViewBinder(private val lifecycleOwner: LifecycleOwner) :
+class NewsItemViewBinder(
+    private val lifecycleOwner: LifecycleOwner
+) :
     ViewBinder<NewsItemViewModel>() {
     override val itemViewType: Int
         get() = R.layout.adapter_item_news
@@ -60,7 +62,10 @@ class NewsItemViewBinder(private val lifecycleOwner: LifecycleOwner) :
             LayoutInflater.from(parent.context).inflate(itemViewType, parent, false)
         )
 
-    class NewsItemViewHolder(private val lifecycleOwner: LifecycleOwner, view: View) :
+    class NewsItemViewHolder(
+        private val lifecycleOwner: LifecycleOwner,
+        view: View
+    ) :
         ViewHolder<NewsItemViewModel>(view) {
 
         private val titleTv = view.adapter_item_news_title_tv
@@ -74,8 +79,10 @@ class NewsItemViewBinder(private val lifecycleOwner: LifecycleOwner) :
             data.like.observe(lifecycleOwner) {
                 likeTv.text = it
             }
-            likeTv.setOnClickListener { data.handleLike() }
 
+            likeTv.setOnClickListener {
+                data.handleLike()
+            }
 
             data.showLoading.observe(lifecycleOwner) {
                 loadingPb.visibility = when (it) {

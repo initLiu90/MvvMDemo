@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -29,6 +30,7 @@ class MainFragment : Fragment() {
 
     private val viewModel: MainFragmentViewModel by viewModels()
     private lateinit var adapter: NewsListAdapter
+    private lateinit var likesNumTv: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +41,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecyclerView(view)
+        likesNumTv = view.fragment_main_news_likes_num_tv
         observerData()
         viewModel.fetchNews()
     }
@@ -63,15 +66,22 @@ class MainFragment : Fragment() {
         ViewBinder.ViewBinderProvider()
             .addViewBinder(HeaderItemViewModel::class, HeaderViewBinder())
             .addViewBinder(FooterItemViewMode::class, FooterViewBinder())
-            .addViewBinder(NewsItemViewModel::class, NewsItemViewBinder(viewLifecycleOwner))
+            .addViewBinder(
+                NewsItemViewModel::class,
+                NewsItemViewBinder(viewLifecycleOwner)
+            )
 
     private fun observerData() {
         viewModel.news.observe(viewLifecycleOwner, { stories ->
             val itemViewModels = mutableListOf<ItemViewModel>(HeaderItemViewModel())
-            itemViewModels.addAll(stories.map { NewsItemViewModel(it) })
+            itemViewModels.addAll(stories.map { NewsItemViewModel(viewModel::handleLike, it) })
             itemViewModels.add(FooterItemViewMode())
 
             adapter.setData(itemViewModels)
+        })
+
+        viewModel.likesNum.observe(viewLifecycleOwner, {
+            likesNumTv.text = "${it}个"
         })
     }
 }
