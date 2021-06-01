@@ -15,15 +15,15 @@ import com.lzp.mvvmdemo.news.viewbinder.HeaderViewBinder
 import com.lzp.mvvmdemo.news.viewbinder.NewsItemViewBinder
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
-class MainFragment : Fragment() {
+class NewsFragment : Fragment() {
     companion object {
         const val TAG = "MainFragment"
 
         @JvmStatic
-        fun newInstance() = MainFragment()
+        fun newInstance() = NewsFragment()
     }
 
-    private val viewModel: MainFragmentViewModel by viewModels()
+    private val viewModel: NewsFragmentViewModel by viewModels()
     private lateinit var adapter: NewsListAdapter
 
     override fun onCreateView(
@@ -41,8 +41,8 @@ class MainFragment : Fragment() {
 
     private fun setupRecyclerView(root: View) {
         root.fragment_main_news_rv.apply {
-            this@MainFragment.adapter = NewsListAdapter(createViewBinders())
-            adapter = this@MainFragment.adapter
+            this@NewsFragment.adapter = NewsListAdapter(createViewBinders())
+            adapter = this@NewsFragment.adapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 

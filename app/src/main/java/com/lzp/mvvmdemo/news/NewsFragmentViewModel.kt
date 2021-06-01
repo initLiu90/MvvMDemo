@@ -14,7 +14,7 @@ import com.lzp.mvvmdemo.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
-class MainFragmentViewModel : ViewModel() {
+class NewsFragmentViewModel : ViewModel() {
     private val _news = MutableLiveData<List<ItemViewModel>>()
     val news: LiveData<List<ItemViewModel>> = _news
 
