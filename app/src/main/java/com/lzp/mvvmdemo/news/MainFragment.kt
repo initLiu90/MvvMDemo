@@ -13,9 +13,6 @@ import com.lzp.mvvmdemo.common.ViewBinder
 import com.lzp.mvvmdemo.news.viewbinder.FooterViewBinder
 import com.lzp.mvvmdemo.news.viewbinder.HeaderViewBinder
 import com.lzp.mvvmdemo.news.viewbinder.NewsItemViewBinder
-import com.lzp.mvvmdemo.news.viewmodels.FooterItemViewMode
-import com.lzp.mvvmdemo.news.viewmodels.HeaderItemViewModel
-import com.lzp.mvvmdemo.news.viewmodels.NewsItemViewModel
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment() {
@@ -60,9 +57,9 @@ class MainFragment : Fragment() {
 
     private fun createViewBinders(): ViewBinder.ViewBinderProvider =
         ViewBinder.ViewBinderProvider()
-            .addViewBinder(HeaderItemViewModel::class, HeaderViewBinder())
-            .addViewBinder(FooterItemViewMode::class, FooterViewBinder())
-            .addViewBinder(NewsItemViewModel::class, NewsItemViewBinder(viewLifecycleOwner))
+            .addViewBinder(HeaderViewBinder())
+            .addViewBinder(FooterViewBinder())
+            .addViewBinder(NewsItemViewBinder(viewLifecycleOwner))
 
     private fun observerData() {
         viewModel.news.observe(viewLifecycleOwner, {

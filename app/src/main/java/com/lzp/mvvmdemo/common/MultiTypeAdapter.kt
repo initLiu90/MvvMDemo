@@ -33,16 +33,14 @@ abstract class ViewHolder<Data : ItemViewModel>(view: View) : RecyclerView.ViewH
 abstract class ViewBinder<T : ItemViewModel> {
     abstract val itemViewType: Int
     abstract fun createViewHolder(parent: ViewGroup): ViewHolder<T>
+    abstract val itemViewModel: KClass<T>
 
     class ViewBinderProvider {
         private val viewBinders = arrayMapOf<KClass<*>, ViewBinder<*>>()
         private val itemViewTypes = arrayMapOf<Int, ViewBinder<*>>()
 
-        fun addViewBinder(
-            type: KClass<*>,
-            viewBinder: ViewBinder<out ItemViewModel>
-        ): ViewBinderProvider {
-            viewBinders[type] = viewBinder
+        fun addViewBinder(viewBinder: ViewBinder<out ItemViewModel>): ViewBinderProvider {
+            viewBinders[viewBinder.itemViewModel] = viewBinder
             itemViewTypes[viewBinder.itemViewType] = viewBinder
             return this
         }

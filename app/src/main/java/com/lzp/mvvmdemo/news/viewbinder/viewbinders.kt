@@ -17,8 +17,12 @@ import com.lzp.mvvmdemo.news.viewmodels.FooterItemViewMode
 import com.lzp.mvvmdemo.news.viewmodels.HeaderItemViewModel
 import com.lzp.mvvmdemo.news.viewmodels.NewsItemViewModel
 import kotlinx.android.synthetic.main.adapter_item_news.view.*
+import kotlin.reflect.KClass
 
 class HeaderViewBinder : ViewBinder<HeaderItemViewModel>() {
+    override val itemViewModel: KClass<HeaderItemViewModel>
+        get() = HeaderItemViewModel::class
+
     override val itemViewType: Int
         get() = R.layout.adapter_item_news_header
 
@@ -38,6 +42,9 @@ class FooterViewBinder : ViewBinder<FooterItemViewMode>() {
     override val itemViewType: Int
         get() = R.layout.adapter_item_news_footer
 
+    override val itemViewModel: KClass<FooterItemViewMode>
+        get() = FooterItemViewMode::class
+
     override fun createViewHolder(parent: ViewGroup): ViewHolder<FooterItemViewMode> =
         FooterViewHolder(
             LayoutInflater.from(parent.context)
@@ -51,6 +58,9 @@ class FooterViewBinder : ViewBinder<FooterItemViewMode>() {
 
 class NewsItemViewBinder(private val lifecycleOwner: LifecycleOwner) :
     ViewBinder<NewsItemViewModel>() {
+    override val itemViewModel: KClass<NewsItemViewModel>
+        get() = NewsItemViewModel::class
+
     override val itemViewType: Int
         get() = R.layout.adapter_item_news
 
